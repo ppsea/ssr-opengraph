@@ -32,7 +32,7 @@ export default function index(props: TProps) {
 
   const shareLink = useCallback(() => {
     var text = document.createElement("textarea");
-    text.innerText = `https://${window.location.host};
+    text.innerText = `https://${window.location.host}`;
     document.body.appendChild(text);
     text.select();
     document.execCommand("copy");
