@@ -6,6 +6,7 @@
 
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { useCallback } from "react";
 
 type TProps = {
   title: string | undefined;
@@ -13,10 +14,6 @@ type TProps = {
   keywords: string | undefined;
   description: string | undefined;
   image: string | undefined;
-};
-
-type TInverted = {
-  inverted: boolean;
 };
 
 //  DEFAULT DATA
@@ -32,6 +29,16 @@ export default function index(props: TProps) {
   const description = props.description ? props.description : OG_DESCRIPTION;
   const url = props.url ? props.url : OG_URL;
   const image = props.image ? props.image : OG_IMAGE;
+
+  const shareLink = useCallback(() => {
+    var text = document.createElement("textarea");
+    text.innerText = window.location.host;
+    document.body.appendChild(text);
+    text.select();
+    document.execCommand("copy");
+    text.remove();
+    alert("copied! share link with social medias. like facebook or linkedIn");
+  }, []);
 
   return (
     <>
@@ -65,6 +72,7 @@ export default function index(props: TProps) {
       </div>
       <div>
         <h3>see the head tag in elements! what is changed?</h3>
+        <button onClick={shareLink}>share link</button>
       </div>
     </>
   );
